@@ -287,4 +287,16 @@ textarea {
   margin-bottom: 10px;
   width: 200px;
 }
+
+.deletebutton {
+  float: right;
+}
+.deletebutton .pure-button:hover {
+  background: #ff0000;
+  color: black;
+}
+.deletebutton .pure-button {
+  background-color: #ff3333;
+  color: white;
+}
 </style>
