@@ -17,9 +17,11 @@
         <li class="pure-menu-item">
           <router-link class="pure-menu-link" to="/services">Services</router-link>
         </li>
-        <li class="pure-menu-item"><a href="/" class="pure-menu-link">Staff</a></li>
         <li class="pure-menu-item">
-          <router-link class="pure-menu-link" to="/admin">Clients</router-link>
+          <router-link class="pure-menu-link" to="/staff">Staff</router-link>
+        </li>
+        <li class="pure-menu-item">
+          <router-link class="pure-menu-link" to="/admin">Profile</router-link>
         </li>
       </ul>
     </div>
@@ -54,7 +56,7 @@ body {
   text-align: center;
   background-color: #213651;
   background-color: #303740;
-  height: 250px;
+  height: 200px;
   color: white;
 }
 
