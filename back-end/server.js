@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-mongoose.connect('mongodb://localhost:27017/lights', {
+mongoose.connect('mongodb://localhost:27017/budgets', {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });
@@ -105,11 +105,13 @@ app.use(cookieSession({
 //     return res.sendStatus(500);
 //   }
 // });
+const bucket = require("./bucket.js");
+app.use("/api/bucket", bucket.routes);
 
-const jobs = require("./jobs.js");
-app.use("/api/jobs", jobs.routes);
+const expense = require("./expense.js");
+app.use("/api/expense", expense.routes);
 
 const users = require("./users.js");
 app.use("/api/users", users.routes);
 
-app.listen(3005, () => console.log('Server listening on port 3005!'));
+app.listen(3008, () => console.log('Server listening on port 3008!'));

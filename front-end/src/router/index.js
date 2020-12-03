@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Admin from '../views/Admin.vue'
-import Services from '../views/Services.vue'
-import Staff from '../views/Staff.vue'
+import Budget from '../views/Budget.vue'
+import Buckets from '../views/Buckets.vue'
 
 Vue.use(VueRouter)
 
@@ -13,19 +12,14 @@ const routes = [{
     component: Home
   },
   {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin
+    path: '/budget',
+    name: 'Budget',
+    component: Budget
   },
   {
-    path: '/services',
-    name: 'Services',
-    component: Services
-  },
-  {
-    path: '/staff',
-    name: 'Staff',
-    component: Staff
+    path: '/buckets',
+    name: 'buckets',
+    component: Buckets
   },
 ]
 

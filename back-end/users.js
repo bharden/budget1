@@ -11,12 +11,11 @@ const router = express.Router();
 // This is the schema. Users have usernames and passwords. We solemnly promise to
 // salt and hash the password!
 const userSchema = new mongoose.Schema({
-  name: String,
-  phone: String,
-  address: String,
+  fname: String,
+  lname: String,
   username: String,
   password: String,
-
+  income: String,
 });
 
 // This is a hook that will be called before a user record is saved,
@@ -106,9 +105,9 @@ router.post('/', async (req, res) => {
   // Make sure that the form coming from the browser includes all required fields,
   // otherwise return an error. A 400 error means the request was
   // malformed.
-  if (!req.body.name || !req.body.phone || !req.body.address || !req.body.username || !req.body.password)
+  if (!req.body.fname || !req.body.lname || !req.body.username || !req.body.password)
     return res.status(400).send({
-      message: "name, phone, address, username and password are required"
+      message: "first name, last name, username and password are required"
     });
 
   try {
@@ -125,11 +124,11 @@ router.post('/', async (req, res) => {
 
     // create a new user and save it to the database
     const user = new User({
-      name: req.body.name,
-      phone: req.body.phone,
-      address: req.body.address,
+      fname: req.body.fname,
+      lname: req.body.lname,
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      income: '0',
     });
     await user.save();
     // set user session info
@@ -195,6 +194,8 @@ router.get('/', validUser, async (req, res) => {
   }
 });
 
+
+
 // logout
 router.delete("/", validUser, async (req, res) => {
   try {
@@ -206,6 +207,32 @@ router.delete("/", validUser, async (req, res) => {
   }
 });
 
+//get particular expense
+router.put("/:id", async (req, res) => {
+  try {
+    const user = await User.findOne({
+      _id: req.params.id
+    })
+    if (req.body.income) {
+      user.income = req.body.income;
+    }
+    else {
+      user.fname = req.body.fname;
+      user.lname = req.body.lname;
+      user.username = req.body.username;
+    }
+    try {
+      await user.save();
+      return res.sendStatus(200);
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(500);
+    }
+  } catch {
+    res.status(404);
+    res.send({error: "this update failed to execute"})
+  }
+});
 
 module.exports = {
   routes: router,

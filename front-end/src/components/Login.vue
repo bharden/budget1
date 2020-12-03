@@ -1,19 +1,18 @@
 <template>
-<div class="hero">
-  <div class="heroBox">
+<div class="login">
+  <div class="loginBox">
     <form class="pure-form">
       <fieldset>
         <legend>Register for an account</legend>
-        <input placeholder="name" v-model="name">
-        <input placeholder="phone" v-model="phone">
-        <input placeholder="address" v-model="address">
+        <input placeholder="first name" v-model="fname">
+        <input placeholder="last name" v-model="lname">
       </fieldset>
       <fieldset>
         <input placeholder="username" v-model="username">
         <input type="password" placeholder="password" v-model="password">
       </fieldset>
       <fieldset>
-        <button type="submit" class="pure-button pure-button-primary" @click.prevent="register">Register</button>
+        <button type="submit" class="buttons" @click.prevent="register">Register</button>
       </fieldset>
     </form>
     <p v-if="error" class="error">{{error}}</p>
@@ -24,7 +23,7 @@
         <input type="password" placeholder="password" v-model="passwordLogin">
       </fieldset>
       <fieldset>
-        <button type="submit" class="pure-button pure-button-primary" @click.prevent="login">Login</button>
+        <button type="submit" class="buttons" @click.prevent="login">Login</button>
       </fieldset>
     </form>
     <p v-if="errorLogin" class="error">{{errorLogin}}</p>
@@ -35,12 +34,11 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'HomePage',
+  name: 'LoginPage',
   data() {
     return {
-      name: '',
-      phone: '',
-      address: '',
+      fname: '',
+      lname: '',
       username: '',
       password: '',
       usernameLogin: '',
@@ -53,13 +51,12 @@ export default {
     async register() {
       this.error = '';
       this.errorLogin = '';
-      if (!this.name || !this.phone || !this.address || !this.username || !this.password)
+      if (!this.fname || !this.lname || !this.username || !this.password)
         return;
       try {
         let response = await axios.post('/api/users', {
-          name: this.name,
-          phone: this.phone,
-          address: this.address,
+          fname: this.fname,
+          lname: this.lname,
           username: this.username,
           password: this.password,
         });
@@ -99,21 +96,21 @@ h1 {
   font-variant: capitalize;
 }
 
-.hero {
+.login {
   padding: 120px;
   display: flex;
   justify-content: center;
 }
 
-.heroBox {
+.loginBox {
   text-align: center;
 }
 
-.hero form {
+.login form {
   font-size: 14px;
 }
 
-.hero form legend {
+.login form legend {
   font-size: 20px;
 }
 
